@@ -37,13 +37,8 @@ public class LoginAuthRespHandler extends ChannelInboundHandlerAdapter {
             return;
         }
 
-        MessageProtobuf.Msg handshakeMsg = imsClient.getHandshakeMsg();
-        if (handshakeMsg == null || handshakeMsg.getHead() == null) {
-            return;
-        }
-
-        int handshakeMsgType = handshakeMsg.getHead().getMsgType();
-        if (handshakeMsgType == handshakeRespMsg.getHead().getMsgType()) {
+       
+        if (MessageType.HANDSHAKE.getMsgType() == handshakeRespMsg.getHead().getMsgType()) {
             System.out.println("收到服务端握手响应消息，message=" + handshakeRespMsg);
             int status = -1;
             try {
